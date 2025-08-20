@@ -23,7 +23,7 @@ const AuthReducer = (state, action) => {
         return { ...state , user : action.payload}
     case "user-log-in":
         localStorage.setItem("user" , JSON.stringify(action.payload))
-        return { ...state, admin: action.payload };
+        return { ...state, user: action.payload };
     default:
       return state;
   }

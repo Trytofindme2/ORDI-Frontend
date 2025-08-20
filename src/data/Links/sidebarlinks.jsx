@@ -17,9 +17,7 @@ const navSections = [
     title: 'Content Management',
     icon: <FaFileAlt className="inline-block mr-2" />,
     links: [
-      { name: 'All Content', href: '#' },
-      { name: 'Reported Posts', href: '#' },
-      { name: 'Delete Inappropriate', href: '#' },
+      { name: 'Reported Posts', to : '/admin/dashboard/report' },
     ],
   },
   {

@@ -42,9 +42,13 @@ export default function Profile() {
     navigation('/user/ordi/setting')
   }
 
-  useEffect(() => {
-    if (user?.email) FetchUserInfo();
-  }, [user?.email]);
+useEffect(() => {
+  if (!user) {
+    setData(null);
+  } else {
+    FetchUserInfo();
+  }
+}, [user]);
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-4 flex flex-col items-center`}>

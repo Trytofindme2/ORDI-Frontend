@@ -3,6 +3,7 @@ import Login from "../pages/admin/login";
 import SignUp from "../pages/admin/signup";
 import Dashboard from "../pages/admin/dashboard";
 import UserManage from "../pages/admin/userManage";
+import ReportMangement from "../pages/admin/reportMangement";
 
 
 const adminRoutes = [
@@ -25,6 +26,10 @@ const adminRoutes = [
       {
         path : 'usermanage',
         element : <UserManage/>
+      },
+      {
+        path : 'report',
+        element : <ReportMangement/>
       }
     ]
   }
