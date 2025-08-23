@@ -23,7 +23,7 @@ const PostMenu = ({ isDark, menuOpen, setMenuOpen, onReport }) => {
               Report to Admin
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-              Unfollow User
+              Follow User
             </li>
             <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
               Block User

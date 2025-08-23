@@ -9,8 +9,9 @@ import FriendList from '../pages/user/friendList'
 import AddRecipe from '../pages/user/addReceipe';
 import Setting from '../pages/user/setting';
 import PostDetail from '../pages/user/postDetail';
-
-
+import Notification from '../pages/user/notification';
+import MessageList from '../pages/user/message';
+import Conversation from '../pages/user/converstaion'
 
 const userRoutes = [
     {
@@ -56,6 +57,18 @@ const userRoutes = [
             {
                 path : 'setting',
                 element : <Setting/>
+            },
+            {
+                path : 'notification',
+                element : <Notification/>
+            },
+            {
+                path : 'message',
+                element : <MessageList/>
+            },
+            {
+                path : 'conversation/:id',
+                element : <Conversation/>
             }
         ]
     }

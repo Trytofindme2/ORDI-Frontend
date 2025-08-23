@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import SearchBar from '../../components/admin/usermanagement/searchbar';
+import SearchBar from '../../components/admin/usermanagement/searchBar';
 import Pagination from '../../components/admin/usermanagement/pagination';
 import adminAPI from '../../helper/adminAPI';
 import dayjs from 'dayjs';

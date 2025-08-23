@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PostMenu from './PostMenu';
-import HeartIcon from '../icons/hearticon';
+import HeartIcon from '../icons/HeartIcon';
 import CommentIcon from '../icons/CommentIcon';
 import BookmarkIcon from '../icons/BookmarkIcon';
 import dayjs from 'dayjs';
@@ -9,22 +9,29 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-const PostCard = ({ post, postId , userId ,isDark, menuOpen, setMenuOpen, onReportClick, onCommentClick }) => {
+const PostCard = ({ post, postId, userId, isDark, menuOpen, setMenuOpen, onReportClick, onCommentClick, className }) => {
   const getFullImageURL = (url) => {
     if (!url) return null;
     if (url.startsWith('http')) return url;
-    return `http://localhost:8080${url.startsWith('/') ? '' : '/'}${url}`;
+    return `http://localhost:8080/profile-images/${url.replace(/^\/+/, '')}`;
+  };
+
+  const getRecipeImageURL = (url) => {
+    if (!url) return null;
+    if (url.startsWith('http')) return url;
+    return `http://localhost:8080/${url.replace(/^\/+/, '')}`;
   };
 
   return (
-    <div className={`rounded-3xl border shadow-md ${isDark ? 'dark:bg-blue-900 border-gray-700' : 'bg-white border-gray-300'}`}>
+    <div className={`rounded-3xl border shadow-md ${isDark ? 'dark:bg-blue-900 border-gray-700' : 'bg-white border-gray-300'} ${className}`}>
       <div className="flex flex-col gap-5 p-5">
+        {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
               src={getFullImageURL(post?.userProfileUrl)}
-              alt=""
-              className="w-16 rounded-full border-2"
+              alt="profile"
+              className="w-16 h-16 object-cover rounded-3xl border-2"
             />
             <div>
               <h3>
@@ -43,16 +50,21 @@ const PostCard = ({ post, postId , userId ,isDark, menuOpen, setMenuOpen, onRepo
           />
         </div>
 
+        {/* Description */}
         <p>{post.description}</p>
 
-        <Link to={`/user/ordi/detail/${post.id}`}>
-          <img
-            src={post.imageUrls?.[0]}
-            alt={post.title}
-            className="rounded-3xl w-full object-cover max-h-[400px]"
-          />
-        </Link>
+        {/* Recipe image (with preview effect) */}
+        {post.imageUrls && post.imageUrls.length > 0 && (
+          <Link to={`/user/ordi/detail/${post.id}`} className="overflow-hidden rounded-3xl">
+            <img
+              src={getRecipeImageURL(post.imageUrls[0])}
+              alt={post.title}
+              className="rounded-3xl w-full object-cover max-h-[400px] transition-transform duration-300 hover:scale-105"
+            />
+          </Link>
+        )}
 
+        {/* Actions */}
         <div className={`flex items-center justify-center gap-3 rounded-2xl p-2 ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
           <div className="flex items-center gap-1 cursor-pointer"><HeartIcon />108</div>
           <div className="flex items-center gap-1 cursor-pointer" onClick={onCommentClick}><CommentIcon />10</div>

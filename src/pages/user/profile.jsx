@@ -14,10 +14,17 @@ export default function Profile() {
   const getFullImageURL = (url) => {
     if (!url) return null;
     if (url.startsWith('http')) return url;
-    return `http://localhost:8080${url.startsWith('/') ? '' : '/'}${url}`;
+    return `http://localhost:8080/profile-images/${url.replace(/^\/+/, '')}`;
   };
 
-  const followers = ['men/32.jpg', 'women/31.jpg', 'men/33.jpg', 'women/32.jpg', 'men/44.jpg', 'women/42.jpg'];
+  const followers = [
+    'men/32.jpg',
+    'women/31.jpg',
+    'men/33.jpg',
+    'women/32.jpg',
+    'men/44.jpg',
+    'women/42.jpg'
+  ];
 
   const articles = [
     { title: 'The Future of Artificial Intelligence: Trends and Challenges', image: '/post-images/Food1.jpg', href: '#' },
@@ -39,16 +46,16 @@ export default function Profile() {
   };
 
   const onNavigate = () => {
-    navigation('/user/ordi/setting')
-  }
+    navigation('/user/ordi/setting');
+  };
 
-useEffect(() => {
-  if (!user) {
-    setData(null);
-  } else {
-    FetchUserInfo();
-  }
-}, [user]);
+  useEffect(() => {
+    if (!user) {
+      setData(null);
+    } else {
+      FetchUserInfo();
+    }
+  }, [user]);
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-4 flex flex-col items-center`}>
@@ -67,11 +74,22 @@ useEffect(() => {
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{data?.address || 'No address available'}</p>
 
           <div className="flex justify-center gap-3 mt-5">
-            <button onClick={onNavigate} className="bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-md font-semibold text-white">Setting</button>
-            <Link to="/user/ordi/friendlist" className="bg-gray-300 hover:bg-gray-400 transition px-5 py-2 rounded-md font-semibold text-gray-800 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600">
+            <button
+              onClick={onNavigate}
+              className="bg-blue-600 hover:bg-blue-700 transition px-5 py-2 rounded-md font-semibold text-white"
+            >
+              Setting
+            </button>
+            <Link
+              to="/user/ordi/friendlist"
+              className="bg-gray-300 hover:bg-gray-400 transition px-5 py-2 rounded-md font-semibold text-gray-800 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600"
+            >
               Friends
             </Link>
-            <Link to="/user/ordi/editProfile" className="bg-gray-300 hover:bg-gray-400 transition px-5 py-2 rounded-md font-semibold text-gray-800 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600">
+            <Link
+              to="/user/ordi/editProfile"
+              className="bg-gray-300 hover:bg-gray-400 transition px-5 py-2 rounded-md font-semibold text-gray-800 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600"
+            >
               Edit
             </Link>
           </div>

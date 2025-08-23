@@ -16,7 +16,9 @@ export default function UPNav({ search, setSearch }) {
   const inputTextColor = isDark ? 'text-white placeholder:text-gray-400' : 'text-gray-900 placeholder:text-gray-500';
   const inputBgColor = isDark ? 'bg-gray-800 border-gray-600' : 'bg-gray-100 border-gray-300';
 
-  if (location.pathname === '/user/ordi/profile') return null;
+    if (['/user/ordi/profile'].includes(location.pathname)) {
+      return null;
+    }
 
   return (
     <div className={`xl:hidden w-full px-4 py-3 ${bgClass} backdrop-blur-lg border rounded-b-lg`}>

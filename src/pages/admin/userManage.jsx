@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import Pagination from '../../components/admin/usermanagement/pagination';
-import SearchBar from '../../components/admin/usermanagement/searchbar';
+import SearchBar from '../../components/admin/usermanagement/searchBar';
 import UserTable from '../../components/admin/usermanagement/userTable';
 import adminAPI from '../../helper/adminAPI';
 import { useNavigate } from 'react-router-dom';
