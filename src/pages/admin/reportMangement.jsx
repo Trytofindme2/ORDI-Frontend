@@ -6,6 +6,7 @@ import adminAPI from '../../helper/adminAPI';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 dayjs.extend(relativeTime);
 
@@ -19,11 +20,14 @@ const ReportManagement = () => {
   const [ascending, setAscending] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  // Fetch reports
   const fetchReports = async () => {
     try {
       setLoading(true);
       const response = await adminAPI.get('getReports', {
-        params: { page, size, sortBy, ascending }
+        params: { page, size, sortBy, ascending },
       });
       const data = response.data;
       setReports(data.content || []);
@@ -36,21 +40,30 @@ const ReportManagement = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await adminAPI.delete(`deleteReport/${id}`);
-      if (response.status === 200) {
-        toast.info('Report deleted successfully');
-        setReports((prev) => prev.filter((r) => r.id !== id));
-      }
-    } catch (error) {
-      toast.error('Error deleting report');
-    }
-  };
-
   useEffect(() => {
     fetchReports();
   }, [page, sortBy, ascending]);
+
+  // Navigate to review page
+  const handleReviewReport = (recipeId) => {
+    navigate(`/admin/dashboard/reviewReport/${recipeId}`);
+  };
+
+  // Delete report without re-fetching
+  const handleDeleteReport = async (reportId) => {
+    if (!window.confirm('Are you sure you want to delete this report?')) return;
+
+    try {
+      await adminAPI.delete(`deleteReport/${reportId}`); // Backend delete API
+      toast.success('Report deleted successfully');
+
+      // Remove from local state immediately
+      setReports((prevReports) => prevReports.filter((r) => r.id !== reportId));
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to delete report');
+    }
+  };
 
   const filteredReports = search
     ? reports.filter((report) =>
@@ -100,11 +113,9 @@ const ReportManagement = () => {
               filteredReports.map((report, index) => (
                 <tr
                   key={report.id}
-                  className={`${
-                    index % 2 === 0 ? 'bg-white' : 'bg-indigo-50'
-                  } hover:bg-indigo-100 transition`}
+                  className={`${index % 2 === 0 ? 'bg-white' : 'bg-indigo-50'} hover:bg-indigo-100 transition`}
                 >
-                  <td className="py-4 px-6 text-sm text-gray-700">{report.id}</td>
+                  <td className="py-4 px-6 text-sm text-gray-700">{report.recipeId}</td>
                   <td className="py-4 px-6 text-sm text-gray-700">{report.reportedByName}</td>
                   <td className="py-4 px-6 text-sm text-gray-700">{report.postOwnerName}</td>
                   <td className="py-4 px-6 text-sm text-gray-700">{report.recipeTitle}</td>
@@ -112,15 +123,15 @@ const ReportManagement = () => {
                   <td className="py-4 px-6 text-sm text-gray-700">
                     {report.reportAt ? dayjs(report.reportAt).fromNow() : 'N/A'}
                   </td>
-                  <td className="py-4 px-6 text-center">
+                  <td className="py-4 px-6 text-center flex justify-center gap-2">
                     <button
-                      onClick={() => toast.info('View report')}
-                      className="text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600 mr-2"
+                      onClick={() => handleReviewReport(report.recipeId)}
+                      className="text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600"
                     >
                       View
                     </button>
                     <button
-                      onClick={() => handleDelete(report.id)}
+                      onClick={() => handleDeleteReport(report.id)}
                       className="text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600"
                     >
                       Delete
@@ -139,6 +150,7 @@ const ReportManagement = () => {
         </table>
       </div>
 
+      {/* Pagination */}
       <div className="mt-4 flex justify-center">
         <Pagination
           currentPage={page}

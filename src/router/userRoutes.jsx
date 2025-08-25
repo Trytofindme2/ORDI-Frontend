@@ -12,6 +12,7 @@ import PostDetail from '../pages/user/postDetail';
 import Notification from '../pages/user/notification';
 import MessageList from '../pages/user/message';
 import Conversation from '../pages/user/converstaion'
+import SavePost from '../pages/user/savePost';
 
 const userRoutes = [
     {
@@ -69,6 +70,10 @@ const userRoutes = [
             {
                 path : 'conversation/:id',
                 element : <Conversation/>
+            },
+            {
+                path : 'savePostList',
+                element : <SavePost/>
             }
         ]
     }

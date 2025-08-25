@@ -23,7 +23,7 @@ const PostCard = ({ post, postId, userId, isDark, menuOpen, setMenuOpen, onRepor
   };
 
   return (
-    <div className={`rounded-3xl border shadow-md ${isDark ? 'dark:bg-blue-900 border-gray-700' : 'bg-white border-gray-300'} ${className}`}>
+    <div className={`rounded-3xl border shadow-md ${isDark ? 'dark:bg-gray-900 border-gray-700' : 'bg-white border-gray-300'} ${className}`}>
       <div className="flex flex-col gap-5 p-5">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -68,7 +68,7 @@ const PostCard = ({ post, postId, userId, isDark, menuOpen, setMenuOpen, onRepor
         <div className={`flex items-center justify-center gap-3 rounded-2xl p-2 ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
           <div className="flex items-center gap-1 cursor-pointer"><HeartIcon />108</div>
           <div className="flex items-center gap-1 cursor-pointer" onClick={onCommentClick}><CommentIcon />10</div>
-          <div className="flex items-center gap-1 cursor-pointer"><BookmarkIcon userId={userId} postId={postId} />5</div>
+          <div className="flex items-center gap-1 cursor-pointer"><BookmarkIcon userId={userId} postId={postId} /></div>
         </div>
       </div>
     </div>

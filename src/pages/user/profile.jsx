@@ -6,17 +6,27 @@ import userAPI from '../../helper/userAPI';
 
 export default function Profile() {
   const [data, setData] = useState(null);
+  const [posts, setPosts] = useState([]); // store user posts
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigate();
   const isDark = theme === 'dark';
 
+  // Profile image formatter
   const getFullImageURL = (url) => {
     if (!url) return null;
     if (url.startsWith('http')) return url;
     return `http://localhost:8080/profile-images/${url.replace(/^\/+/, '')}`;
   };
 
+  // Post image formatter
+  const getPostImageURL = (url) => {
+    if (!url) return null;
+    if (url.startsWith('http')) return url;
+    return `http://localhost:8080/${url.replace(/^\/+/, '')}`;
+  };
+
+  // Demo follower images
   const followers = [
     'men/32.jpg',
     'women/31.jpg',
@@ -26,12 +36,7 @@ export default function Profile() {
     'women/42.jpg'
   ];
 
-  const articles = [
-    { title: 'The Future of Artificial Intelligence: Trends and Challenges', image: '/post-images/Food1.jpg', href: '#' },
-    { title: 'The Rise of Blockchain Technology: A Comprehensive Guide', image: '/post-images/Food2.jpg', href: '#' },
-    { title: 'How Quantum Computing Will Revolutionize Data Security', image: '/post-images/Food3.jpg', href: '#' },
-  ];
-
+  // Fetch user info
   const FetchUserInfo = async () => {
     try {
       const response = await userAPI.get(`findByEmail/${user.email}`);
@@ -45,6 +50,19 @@ export default function Profile() {
     }
   };
 
+  // Fetch user posts
+  const FetchUserPosts = async (userId) => {
+    try {
+      const response = await userAPI.get(`getOwnPost/${userId}`);
+      if (response.status === 200) {
+        setPosts(response.data.data || []);
+      }
+    } catch (error) {
+      console.error('Error fetching user posts:', error);
+    }
+  };
+
+  // Navigate to settings
   const onNavigate = () => {
     navigation('/user/ordi/setting');
   };
@@ -52,26 +70,45 @@ export default function Profile() {
   useEffect(() => {
     if (!user) {
       setData(null);
+      setPosts([]);
     } else {
       FetchUserInfo();
+      FetchUserPosts(user.id);
     }
   }, [user]);
 
   return (
-    <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-4 flex flex-col items-center`}>
-      <div className={`w-full max-w-md ${isDark ? 'bg-gray-800 border-gray-600' : 'bg-gray-50 border-gray-200'} rounded-xl shadow-md overflow-hidden border`}>
+    <div
+      className={`min-h-screen ${
+        isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+      } p-4 flex flex-col items-center`}
+    >
+      {/* User Profile Card */}
+      <div
+        className={`w-full max-w-md ${
+          isDark ? 'bg-gray-800 border-gray-600' : 'bg-gray-50 border-gray-200'
+        } rounded-xl shadow-md overflow-hidden border`}
+      >
         <div className="border-b border-gray-300 p-6 text-center">
           <img
-            src={getFullImageURL(data?.profileURL) || 'https://via.placeholder.com/150?text=No+Image'}
+            src={
+              getFullImageURL(data?.profileURL) ||
+              'https://via.placeholder.com/150?text=No+Image'
+            }
             alt={data?.name || 'User'}
             className="mx-auto h-28 w-28 rounded-full object-cover border-2 border-blue-600"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = 'https://via.placeholder.com/150?text=No+Image';
+              e.currentTarget.src =
+                'https://via.placeholder.com/150?text=No+Image';
             }}
           />
-          <h2 className="mt-4 text-2xl font-semibold">{data?.name || 'Loading...'}</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{data?.address || 'No address available'}</p>
+          <h2 className="mt-4 text-2xl font-semibold">
+            {data?.name || 'Loading...'}
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            {data?.address || 'No address available'}
+          </p>
 
           <div className="flex justify-center gap-3 mt-5">
             <button
@@ -95,9 +132,14 @@ export default function Profile() {
           </div>
         </div>
 
+        {/* Followers */}
         <div className="p-6">
           <div className="flex items-center gap-2 mb-4 text-gray-700 dark:text-gray-300">
-            <svg className="h-6 w-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="h-6 w-6 text-blue-600"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zM12 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
             </svg>
             <span className="font-medium">12 Followers you know</span>
@@ -119,19 +161,41 @@ export default function Profile() {
         </div>
       </div>
 
+      {/* User's Own Posts */}
       <div className="mt-8 max-w-5xl w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-2">
-        {articles.concat(articles).map((article, index) => (
-          <article
-            key={index}
-            className={`relative rounded-lg overflow-hidden shadow-md cursor-pointer 
-                        ${isDark ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-900'} transition`}
-          >
-            <img src={article.image} alt={article.title} className="w-full h-44 object-cover" loading="lazy" />
-            <div className="p-4">
-              <h3 className="font-semibold text-lg">{article.title}</h3>
-            </div>
-          </article>
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post, index) => (
+            <article
+              key={index}
+              className={`relative rounded-lg overflow-hidden shadow-md cursor-pointer 
+                          ${
+                            isDark
+                              ? 'bg-gray-800 hover:bg-gray-700 text-white'
+                              : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+                          } transition`}
+            >
+              <img
+                src={
+                  getPostImageURL(post.imageUrls?.[0]) ||
+                  '/post-images/default.jpg'
+                }
+                alt={post.title}
+                className="w-full h-44 object-cover"
+                loading="lazy"
+              />
+              <div className="p-4">
+                <h3 className="font-semibold text-lg">{post.title}</h3>
+                <p className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+                  {post.description}
+                </p>
+              </div>
+            </article>
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-500 dark:text-gray-400">
+            No posts yet.
+          </p>
+        )}
       </div>
     </div>
   );

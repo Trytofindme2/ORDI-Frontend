@@ -54,28 +54,12 @@ const SignUp = () => {
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
-          Flowbite
+          ORDI
         </a>
 
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-6">
           Create an account
         </h1>
-
-        <button
-          type="button"
-          disabled={loading}
-          className="w-full text-white flex items-center justify-center mb-6 border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 transition"
-        >
-          <svg className="w-5 h-5 mr-3" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" fillRule="evenodd">
-              <path fill="#4285F4" d="M17.64 9.2045c0-.638-.0574-1.251-.1645-1.84H9v3.48h4.844c-.209 1.124-.846 2.078-1.804 2.72v2.256h2.915c1.708-1.572 2.695-3.89 2.695-6.616z" />
-              <path fill="#34A853" d="M9 18c2.43 0 4.474-.8 5.965-2.165l-2.915-2.256c-.808.54-1.844.863-3.05.863-2.348 0-4.337-1.586-5.045-3.72H.987v2.34A9 9 0 009 18z" />
-              <path fill="#FBBC05" d="M3.955 10.722a5.4 5.4 0 010-3.444V4.94H.987a9.004 9.004 0 000 8.12l2.968-2.338z" />
-              <path fill="#EA4335" d="M9 3.58c1.32 0 2.506.455 3.44 1.347l2.58-2.58C13.466.88 11.42 0 9 0 5.523 0 2.446 1.99.987 4.94l2.968 2.34c.708-2.134 2.697-3.7 5.045-3.7z" />
-            </g>
-          </svg>
-          Sign up with Google
-        </button>
 
         <form className="space-y-5" onSubmit={handleOnSubmit}>
           <div>

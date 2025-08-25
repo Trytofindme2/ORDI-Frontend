@@ -31,6 +31,7 @@ const UserLayout = () => {
     "/user/ordi/profile",
     "/user/ordi/notification",
     "/user/ordi/message",
+    "/user/ordi/savePostList"
   ];
 
   // Post detail regex

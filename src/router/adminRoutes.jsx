@@ -4,6 +4,7 @@ import SignUp from "../pages/admin/signup";
 import Dashboard from "../pages/admin/dashboard";
 import UserManage from "../pages/admin/userManage";
 import ReportMangement from "../pages/admin/reportMangement";
+import ReviewReport from "../pages/admin/reviewReport";
 
 
 const adminRoutes = [
@@ -30,6 +31,10 @@ const adminRoutes = [
       {
         path : 'report',
         element : <ReportMangement/>
+      },
+      {
+        path : 'reviewReport/:id',
+        element : <ReviewReport/>
       }
     ]
   }

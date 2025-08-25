@@ -72,11 +72,6 @@ const Verification = () => {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-gray-400">
-          Didn’t get the code?
-          <span className="text-blue-600 underline cursor-pointer ml-1">Resend</span>
-        </div>
-
         <div className="mt-2 text-center text-[11px] text-gray-400">
           Verification helps us secure your account and personalize your Ordi experience.
         </div>

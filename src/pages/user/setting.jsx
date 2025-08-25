@@ -69,6 +69,19 @@ const Setting = () => {
           </div>
         </section>
 
+        {/* Saved Posts card */}
+        <section
+          onClick={() => navigate('/user/ordi/savePostList')}
+          className={`cursor-pointer rounded-xl p-4 shadow-sm flex items-center justify-between hover:bg-gray-100 dark:hover:bg-darkblue-700 transition ${isDark ? 'bg-darkblue-800' : 'bg-white'}`}
+        >
+          <span className="text-sm font-medium">Saved Posts</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M9 5l7 7-7 7" />
+          </svg>
+        </section>
+
         {/* Logout card */}
         <section className={`rounded-xl p-4 shadow-sm ${isDark ? 'bg-darkblue-800' : 'bg-white'}`}>
           <button
