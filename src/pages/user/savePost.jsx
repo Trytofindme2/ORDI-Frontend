@@ -136,7 +136,7 @@ const SavePost = () => {
                   <div className="flex items-center gap-3">
                     {post.authorProfileUrl ? (
                       <img
-                        src={getProfileImageURL(post.authorProfileUrl)}
+                        src={`http://localhost:8080/uploads/${post.authorProfileUrl}`}
                         alt={post.authorName}
                         className="w-9 h-9 rounded-full object-cover border border-gray-300 dark:border-darkblue-700"
                       />

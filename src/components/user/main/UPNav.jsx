@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../../context/themeContext';
 
 export default function UPNav({ search, setSearch }) {
-  const [activeTab, setActiveTab] = React.useState('People');
+  // const [activeTab, setActiveTab] = React.useState('People');
   const location = useLocation();
   const { theme } = useContext(ThemeContext);
 
@@ -44,12 +44,12 @@ export default function UPNav({ search, setSearch }) {
         </button>
       </div>
 
-      <div
+      {/* <div
         className={`mt-4 flex justify-around text-sm font-semibold border-b ${
           isDark ? 'text-gray-300 border-gray-600' : 'text-gray-700 border-gray-300'
         }`}
       >
-        {['People', 'Dish', 'Hashtag'].map((tab) => (
+        {['People', 'Dish', 'Hashtag','Friends'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -60,7 +60,7 @@ export default function UPNav({ search, setSearch }) {
             {tab}
           </button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

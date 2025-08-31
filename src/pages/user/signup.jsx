@@ -17,16 +17,13 @@ const SignUp = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
-
     if (password !== RepeatPassword) {
       const err = 'Passwords do not match';
       setErrorMsg(err);
       toast.error(err);
       return;
     }
-
     const data = { email, password };
-
     try {
       setLoading(true);
       const response = await userAPI.post('sendVerificationCode', data);

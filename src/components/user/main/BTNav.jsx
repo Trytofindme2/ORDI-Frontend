@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../../context/themeContext'; // Adjust path as needed
 
 export default function BottomNav() {
- const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const bgClass = theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-gray-100 border-gray-300/30';
   const hoverBgClass = theme === 'dark' ? 'dark:hover:bg-gray-800' : 'hover:bg-gray-200';
@@ -57,21 +57,22 @@ export default function BottomNav() {
       </li>
 
       <li className={`rounded-full p-3 transition-colors duration-200 ${hoverBgClass}`}>
-        <Link to={'/user/ordi/notification'} className="flex items-center justify-start gap-2 text-xl hover:text-blue-600">
+        <Link to={'/user/ordi/Friend'} className="flex items-center justify-start gap-2 text-xl hover:text-blue-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke={strokeColor}
+            strokeWidth={1.5}
+            stroke="currentColor"
             className="w-6 h-6"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+              d="M15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.5 19.5v-.75a6 6 0 0 1 6-6h3a6 6 0 0 1 6 6v.75M12 12v.01"
             />
           </svg>
+
         </Link>
       </li>
 

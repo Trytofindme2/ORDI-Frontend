@@ -21,6 +21,7 @@ const UserLayout = () => {
     "/user/ordi/editProfile",
     "/user/ordi/friendlist",
     "/user/ordi/setting",
+
   ];
 
   // Check if dynamic conversation page
@@ -31,20 +32,36 @@ const UserLayout = () => {
     "/user/ordi/profile",
     "/user/ordi/notification",
     "/user/ordi/message",
-    "/user/ordi/savePostList"
+    "/user/ordi/savePostList",
+    "/user/ordi/Friend",
+    "/user/ordi/addReceipe",
+    
   ];
 
   // Post detail regex
   const isPostDetail = /^\/user\/ordi\/detail\/[^/]+$/.test(currentPath);
+  const isSearchUserProfilePage =
+    currentPath.startsWith("/user/ordi/searchuserprofile/");
 
   // Determine whether to hide navs
-  const shouldHideBottomNav = hideBothNavExact.includes(currentPath) || isConversationPage;
+  const shouldHideBottomNav =
+    hideBothNavExact.includes(currentPath) || isConversationPage;
+
   const shouldHideTopNav =
-    shouldHideBottomNav || hideTopOnlyPaths.includes(currentPath) || isPostDetail;
+    shouldHideBottomNav ||
+    hideTopOnlyPaths.includes(currentPath) ||
+    isPostDetail ||
+    isSearchUserProfilePage;
+
+
+  // Determine whether to hide navs
+  // const shouldHideBottomNav = hideBothNavExact.includes(currentPath) || isConversationPage;
+  // const shouldHideTopNav =
+  //   shouldHideBottomNav || hideTopOnlyPaths.includes(currentPath) || isPostDetail;
 
   // Padding for main content
-  const paddingTop = shouldHideTopNav ? "pt-0" : "pt-20";
-  const paddingBottom = shouldHideBottomNav ? "pb-0" : "pb-16";
+  const paddingTop = shouldHideTopNav ? "pt-0" : "pt-10";
+  const paddingBottom = shouldHideBottomNav ? "pb-0" : "pb-10";
 
   // Background and shadow styles
   const bgColor = isDark ? "bg-gray-900" : "bg-white";
@@ -63,7 +80,7 @@ const UserLayout = () => {
       )}
 
       <main
-        className={`flex-1 w-full mt-5 overflow-y-auto px-0 sm:px-4 ${paddingTop} ${paddingBottom}`}
+        className={`flex-1 w-full mt-1 overflow-y-auto px-0 sm:px-4 ${paddingTop} ${paddingBottom}`}
       >
         <Outlet context={{ search, user }} />
       </main>

@@ -5,7 +5,7 @@ import VerificationProtected from '../protector/VerificationRouteGuard';
 import Post from '../pages/user/post';
 import Profile from '../pages/user/profile'
 import Edituserinfo from '../pages/user/edituserinfo';
-import FriendList from '../pages/user/friendList'
+import FriendList from '../pages/user/FriendAndFollowList';
 import AddRecipe from '../pages/user/addReceipe';
 import Setting from '../pages/user/setting';
 import PostDetail from '../pages/user/postDetail';
@@ -13,6 +13,8 @@ import Notification from '../pages/user/notification';
 import MessageList from '../pages/user/message';
 import Conversation from '../pages/user/converstaion'
 import SavePost from '../pages/user/savePost';
+import Friend from '../pages/user/Friend';
+import SearchUserProfile from '../pages/user/SearchUserProfile';
 
 const userRoutes = [
     {
@@ -64,17 +66,25 @@ const userRoutes = [
                 element : <Notification/>
             },
             {
+                path : 'friend',
+                element : <Friend/>
+            },
+            {
                 path : 'message',
                 element : <MessageList/>
             },
             {
-                path : 'conversation/:id',
+                path : 'conversation/:friendId',
                 element : <Conversation/>
             },
             {
                 path : 'savePostList',
                 element : <SavePost/>
-            }
+            },
+            {
+                path : 'searchuserprofile/:email/:searchUserId',
+                element : <SearchUserProfile/>
+            },
         ]
     }
 ]

@@ -62,11 +62,11 @@ const PostDetail = () => {
               >
                 Back
               </button>
-              <button
+              {/* <button
                 className="flex-1 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-xs uppercase shadow-md text-white transition"
               >
                 Order
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

@@ -43,7 +43,7 @@ const EditUserInfo = () => {
     if (!url) return null;
     if (url.startsWith('http')) return url;
     // your backend serves images at /profile-images/<filename>
-    return `http://localhost:8080/profile-images/${url.replace(/^\/+/, '')}`;
+    return `http://localhost:8080/uploads/${url.replace(/^\/+/, '')}`;
   };
 
   const handleFileChange = (e) => {
