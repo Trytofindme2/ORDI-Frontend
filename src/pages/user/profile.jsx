@@ -14,6 +14,7 @@ export default function Profile() {
   const navigation = useNavigate();
   const isDark = theme === "dark";
   const [reload, setReload] = useState(false);
+  
   const getPostImageURL = (url) => {
     if (!url) return null;
     if (url.startsWith("http")) return url;

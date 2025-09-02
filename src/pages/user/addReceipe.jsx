@@ -7,6 +7,7 @@ import VideoUpload from "../../components/user/receipeForm/VideoUpload";
 import IngredientList from "../../components/user/receipeForm/IngredientList";
 import TimeInputs from "../../components/user/receipeForm/TimeInput";
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 const AddRecipeMobile = () => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
@@ -21,6 +22,7 @@ const AddRecipeMobile = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [videoFile, setVideoFile] = useState(null);
   const [videoPreview, setVideoPreview] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,14 +43,12 @@ const AddRecipeMobile = () => {
       images.forEach((img) => formData.append("images", img));
       if (videoFile) formData.append("video", videoFile);
       const res = await userAPI.post(`/createReceipe/${user.id}`, formData);
-      //{
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // });
       if (res.status === 200) {
-        toast.success('Friend canceled successfully!', { style: glassyToastStyle, position: 'top-center' });
+        toast.success('Add Receipe Successfully!', { style: glassyToastStyle, position: 'top-center' });
         setTitle(""); setDescription(""); setDifficulty("");
         setPreparationTime(0); setCookingTime(0); setIngredients([]);
         setImages([]); setImagePreviews([]); setVideoFile(null); setVideoPreview(null);
+        navigate('/user/ordi/main')
       }
     } catch (err) {
       console.error("Error submitting recipe:", err);

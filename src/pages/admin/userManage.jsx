@@ -79,30 +79,7 @@ const UserManagement = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await adminAPI.delete(`deleteUserById/${id}`);
-      if (response.status === 200) {
-        toast.info('User deleted successfully');
-
-        if (search) {
-          setAllUsers((prev) => prev.filter((u) => u.id !== id));
-        } else {
-          setPaginatedUsers((prev) => {
-            const updated = prev.filter((u) => u.id !== id);
-            if (updated.length === 0 && currentPage > 0) {
-              setCurrentPage(currentPage - 1);
-            }
-            return updated;
-          });
-          setTotalPages((prev) => (paginatedUsers.length <= 1 ? prev - 1 : prev));
-        }
-      }
-    } catch (error) {
-      toast.error('Error deleting user');
-    }
-  };
-
+  
   useEffect(() => {
     if (!admin) {
       toast.error('Access denied. Please log in as admin.');
@@ -156,7 +133,6 @@ const UserManagement = () => {
       <UserTable
         users={filteredUsers}
         handleBanToggle={handleBanToggle}
-        handleDelete={handleDelete}
       />
 
       {!search && (

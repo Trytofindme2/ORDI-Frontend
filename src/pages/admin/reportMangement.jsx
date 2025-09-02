@@ -44,20 +44,14 @@ const ReportManagement = () => {
     fetchReports();
   }, [page, sortBy, ascending]);
 
-  // Navigate to review page
   const handleReviewReport = (recipeId) => {
     navigate(`/admin/dashboard/reviewReport/${recipeId}`);
   };
 
-  // Delete report without re-fetching
   const handleDeleteReport = async (reportId) => {
-    if (!window.confirm('Are you sure you want to delete this report?')) return;
-
     try {
       await adminAPI.delete(`deleteReport/${reportId}`); // Backend delete API
       toast.success('Report deleted successfully');
-
-      // Remove from local state immediately
       setReports((prevReports) => prevReports.filter((r) => r.id !== reportId));
     } catch (error) {
       console.error(error);

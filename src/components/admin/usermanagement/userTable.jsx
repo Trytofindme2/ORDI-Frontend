@@ -27,7 +27,6 @@ const UserTable = ({ users, handleBanToggle, handleDelete }) => (
               key={user.id}
               user={user}
               handleBanToggle={handleBanToggle}
-              handleDelete={handleDelete}
             />
           ))
         )}

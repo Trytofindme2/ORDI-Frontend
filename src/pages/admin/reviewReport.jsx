@@ -18,7 +18,7 @@ const ReviewReport = () => {
   const getProfileImageURL = (url) => {
     if (!url) return null;
     if (url.startsWith("http")) return url;
-    return `http://localhost:8080/profile-images/${url.replace(/^\/+/, "")}`;
+    return `http://localhost:8080/uploads/${url.replace(/^\/+/, "")}`;
   };
 
   useEffect(() => {

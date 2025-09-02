@@ -16,6 +16,8 @@ import SavePost from '../pages/user/savePost';
 import Friend from '../pages/user/Friend';
 import SearchUserProfile from '../pages/user/SearchUserProfile';
 import ProtectedRoute from "../context/ProtectedRoute";
+import UserStatusChecker from "../context/UserStatusChecker";
+
 
 const userRoutes = [
   {
@@ -32,11 +34,15 @@ const userRoutes = [
   },
   {
     path: "/",
-    element: <ProtectedRoute />,   // ⬅️ only allow if logged in
+    element: <ProtectedRoute />,   
     children: [
       {
         path: "user/ordi",
-        element: <UserLayout />,
+        element: (
+          <UserStatusChecker>
+            <UserLayout />
+          </UserStatusChecker>
+        ),
         children: [
           { path: "profile", element: <Profile /> },
           { path: "main", element: <Post /> },
@@ -58,78 +64,3 @@ const userRoutes = [
 ];
 
 export default userRoutes;
-
-// const userRoutes = [
-//     {
-//         path : '/user/sign-up',
-//         element : <SignUp/>
-//     },
-//     {
-//         path : '/user/verification',
-//         element : <VerificationProtected/>
-//     },
-//     {
-//         path : '/user/log-in',
-//         element : <LogIn/>
-//     },
-//     {
-//         path : '/user/ordi',
-//         element : <UserLayout/>,
-//         children : [
-//             {
-//                 path : 'profile',
-//                 element : <Profile/>
-//             },
-//             {
-//                 path : 'main',
-//                 element : <Post/>
-//             },
-//             {
-//                 path : 'detail/:id',
-//                 element : <PostDetail/>
-//             },
-//             {
-//                 path : 'editProfile',
-//                 element : <Edituserinfo/>
-//             },
-//             {
-//                 path : 'friendlist',
-//                 element : <FriendList/>
-//             },
-//             {
-//                 path : 'addReceipe',
-//                 element : <AddRecipe/>
-//             },
-//             {
-//                 path : 'setting',
-//                 element : <Setting/>
-//             },
-//             {
-//                 path : 'notification',
-//                 element : <Notification/>
-//             },
-//             {
-//                 path : 'friend',
-//                 element : <Friend/>
-//             },
-//             {
-//                 path : 'message',
-//                 element : <MessageList/>
-//             },
-//             {
-//                 path : 'conversation/:friendId',
-//                 element : <Conversation/>
-//             },
-//             {
-//                 path : 'savePostList',
-//                 element : <SavePost/>
-//             },
-//             {
-//                 path : 'searchuserprofile/:email/:searchUserId',
-//                 element : <SearchUserProfile/>
-//             },
-//         ]
-//     }
-// ]
-
-// export default userRoutes;

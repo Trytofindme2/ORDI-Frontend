@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaEdit, FaTrash, FaBan, FaCheckCircle } from 'react-icons/fa';
 
 
-const UserRow = ({ user, handleBanToggle, handleDelete }) => {
+const UserRow = ({ user, handleBanToggle}) => {
   return (
     <>
       <tr className="border-b border-gray-200 hover:bg-indigo-50 transition">
@@ -20,9 +20,6 @@ const UserRow = ({ user, handleBanToggle, handleDelete }) => {
           }`}>{user.account_status}</span>
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-center flex justify-center gap-4">  
-          <button title="Delete" onClick={() => handleDelete(user.id)} className="text-red-600 hover:text-red-800 transition">
-            <FaTrash size={18} />
-          </button>
           <button
             title={user.account_status === 'Banned' ? 'Unban' : 'Ban'}
             onClick={() => handleBanToggle(user.id)}
