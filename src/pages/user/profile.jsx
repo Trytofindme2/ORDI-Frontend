@@ -78,7 +78,7 @@ export default function Profile() {
       const response = await userAPI.post(`/deletePost/${postId}`);
       if (response.status === 200) {
         setConfirmDeleteId(null);
-        toast.success('Follower Ban successfully!', { style: glassyToastStyle, position: 'top-center' });
+        toast.success('Post Delete successfully!', { style: glassyToastStyle, position: 'top-center' });
         setReload(prev => !prev);
       }
     } catch (error) {

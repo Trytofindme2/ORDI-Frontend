@@ -16,7 +16,7 @@ import SavePost from '../pages/user/savePost';
 import Friend from '../pages/user/Friend';
 import SearchUserProfile from '../pages/user/SearchUserProfile';
 import ProtectedRoute from "../context/ProtectedRoute";
-import UserStatusChecker from "../context/UserStatusChecker";
+// import UserStatusChecker from "../context/UserStatusChecker";
 
 
 const userRoutes = [
@@ -39,9 +39,10 @@ const userRoutes = [
       {
         path: "user/ordi",
         element: (
-          <UserStatusChecker>
-            <UserLayout />
-          </UserStatusChecker>
+          // <UserStatusChecker>
+          //   <UserLayout />
+          // </UserStatusChecker>
+          <UserLayout />
         ),
         children: [
           { path: "profile", element: <Profile /> },

@@ -36,7 +36,6 @@ const FriendAndFollowList = () => {
         setFollowers(profile.followers || []);
         setFollowings(profile.followings || []);
         setFriends(profile.friends || []);
-        console.log("Fetched userData:", profile);
       } else {
         console.warn("No user data received");
       }
